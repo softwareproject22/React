@@ -1,0 +1,34 @@
+.grid{
+   display: grid;
+   justify-items: center;
+   align-content: start;
+   grid-template-rows: 20vh 1fr;
+}
+
+.login{
+    display: grid;
+    width: 35vw;
+    color: #f5b38e;
+
+    input{
+        border: solid 1px #f5b38e;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        height: 7vh;
+    }
+
+    input::placeholder{
+        color: #f5b38e;
+    }
+
+    input[type="submit"] {
+        background-color: #f5b38e;
+        color: white;
+    }
+
+    div{
+        text-decoration: underline;
+        margin-bottom: 50px;
+        text-align: right;
+    }
+}
