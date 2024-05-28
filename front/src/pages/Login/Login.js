@@ -9,7 +9,12 @@ function Login(){
     const [pwd, setPwd]=useState('');
 
     const handleSubmit=()=>{
-        navigate(`/User`);
+        if(id==='admin'){
+            navigate('/Admin');
+        }
+        else{
+            navigate(`/User`);
+        }
     }
 
     return(

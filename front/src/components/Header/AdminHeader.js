@@ -1,8 +1,7 @@
-import './Header.css'
-import '../../App.css'
 import { useNavigate } from 'react-router-dom';
+import './Header.css'
 
-const Header=(props)=>{
+const AdminHeader=()=>{
     const navigate=useNavigate();
 
     const handleLogout=()=>{
@@ -10,17 +9,21 @@ const Header=(props)=>{
     }
 
     const gotoHome=()=>{
-        navigate('/User/')
+        navigate('/Admin/')
     }
 
     const gotoIssue=()=>{
-        navigate('/User/issue')
+        navigate('/Admin/issue')
     }
 
     const gotoStats=()=>{}
 
     const gotoView=()=>{
-        navigate('/User/view')
+        navigate('/Admin/view')
+    }
+
+    const gotoAdmin=()=>{
+        navigate('/Admin/admin')
     }
 
     return(
@@ -31,7 +34,7 @@ const Header=(props)=>{
                 </div>
                 <nav className='menu'>
                     <ul>
-                        user로 로그인
+                        admin로 로그인
                         <span>|</span>
                         <li onClick={handleLogout}>
                             Logout
@@ -48,6 +51,9 @@ const Header=(props)=>{
                         <li onClick={gotoStats}>
                             Stats
                         </li>
+                        <li onClick={gotoAdmin}>
+                            Admin
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -55,4 +61,4 @@ const Header=(props)=>{
     );
 }
 
-export default Header
+export default AdminHeader
