@@ -1,5 +1,5 @@
-import Header from "./Header/Header";
-import '../App.css'
+import Header from "../Header/Header";
+import '../../App.css'
 
 const Layout=(props)=>{
     return(

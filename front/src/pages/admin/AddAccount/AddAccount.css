@@ -1,0 +1,54 @@
+.title{
+    text-align: left;
+    color: #827f7f;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.addacount{
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+    height: 27vh;
+    border-radius: 10px;
+    border: 1px solid #827f7f;
+
+    span{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;    
+    }
+
+    .horizon{
+        margin-top: 2vh;
+        display: grid;
+        grid-template-columns: 10vw 20vw 20vw 20vw;
+
+        input{
+            border: 1px solid #827f7f;
+            border-radius: 5px;
+            height: 3vh;
+        }
+
+        input+label{
+            margin-left: 5vw;
+        }
+    }
+
+    input[type="submit"]{
+        align-self: flex-end;
+        margin-right: 3vw;
+        margin-bottom: 2vh;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 8vw;
+        height: 4vh;
+        background-color: #d8d8d8;
+        color: #827f7f;
+    }
+}

@@ -1,5 +1,5 @@
-import '../App.css'
-import AdminHeader from './Header/AdminHeader';
+import '../../App.css'
+import AdminHeader from '../Header/AdminHeader';
 
 const AdminLayout=(props)=>{
     return(

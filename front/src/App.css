@@ -32,3 +32,8 @@
 .main{
   padding: 2vh 2vw;
 }
+
+.flexbox{
+  display: grid;
+  grid-template-columns: 16vw 1fr;
+}

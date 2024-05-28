@@ -4,7 +4,7 @@ import Userhome from '../pages/user/userHome';
 import Issue from '../pages/user/Issue/Issue';
 import View from '../pages/user/View/View';
 import Detail from '../pages/user/Detail/Detail';
-import AdminLayout from '../components/AdminLayout';
+import AdminLayout from '../components/Layout/AdminLayout';
 import Admin from '../pages/admin/Admin';
 
 function AdminRouter() {
@@ -16,7 +16,7 @@ function AdminRouter() {
         <Route path='/detail' element={<Detail/>}/>
         <Route path='/issue' element={<Issue/>}/>
         <Route path='/stats' element={<Userhome />}/>
-        <Route path='/admin' element={<Admin/>}/>
+        <Route path='/admin/*' element={<Admin/>}/>
       </Routes>
     </AdminLayout>
   );

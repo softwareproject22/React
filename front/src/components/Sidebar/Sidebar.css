@@ -1,5 +1,23 @@
-.sidebar{
-    height: 100%;
+.bar{
+    display: fixed;
+    justify-self: left;
     width: 14vw;
-    border-right: 1px solid #827f7f;
+    border: 1px solid #827f7f;
+    border-radius: 10px;
+    height: 82vh;
+    margin: 0;
+    padding: 0;
+
+    ul{
+        margin-top: 5vh;
+        list-style: none;
+
+        li+li{
+            margin-top: 2vh;
+        }
+
+        li{
+            cursor: pointer;
+        }
+    }
 }
