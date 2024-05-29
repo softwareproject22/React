@@ -17,7 +17,9 @@ const Header=(props)=>{
         navigate('/User/issue')
     }
 
-    const gotoStats=()=>{}
+    const gotoStats=()=>{
+        navigate('/User/stats')
+    }
 
     const gotoView=()=>{
         navigate('/User/view')

@@ -1,0 +1,33 @@
+.numofIssue{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .topic{
+        margin-top: 5vh;
+        margin-bottom: 2vh;
+        font-size: 30px;
+        font-weight: 900;
+        color: #827f7f;
+    }
+
+    .switch{
+        margin-top: 5vh;
+
+        button{
+            font-size: 20px;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        button:hover{
+            text-decoration: underline;
+        }
+    }
+}
+
+.highlightbtn{
+    text-decoration: underline;
+}

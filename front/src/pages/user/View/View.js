@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './View.css'
 import { useEffect, useState } from 'react';
 import { SearchAssignedIssue, SearchIssuebyStatus, SearchReportedIssue, browseIssue } from '../../../apis/issue';
@@ -9,6 +9,8 @@ function View(){
     const [search, setSearch]=useState("");
     const navigate=useNavigate();
     const userRole="PL";
+    const location=useLocation();
+    const path=location.pathname;
     
     const PLData = async () => {
         try{
@@ -98,7 +100,12 @@ function View(){
     },[])
 
     const getDetail=(props)=>{
-        navigate('/User/detail/'+props)
+        if(path.includes("User")){
+            navigate('/User/detail/'+props)
+        }
+        else{
+            navigate('/Admin/detail/'+props)
+        }
     }
 
     return(

@@ -1,0 +1,25 @@
+.bar{
+    display: fixed;
+    justify-self: left;
+    width: 14vw;
+    border: 1px solid #827f7f;
+    border-radius: 10px;
+    height: 82vh;
+    margin: 0;
+    padding: 0;
+
+    ul{
+        padding: 2vw;
+        margin-top: 5vh;
+        list-style: none;
+
+        li+li{
+            margin-top: 2vh;
+        }
+
+        li{
+            font-size: 14px;
+            cursor: pointer;
+        }
+    }
+}

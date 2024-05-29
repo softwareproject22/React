@@ -16,7 +16,9 @@ const AdminHeader=()=>{
         navigate('/Admin/issue')
     }
 
-    const gotoStats=()=>{}
+    const gotoStats=()=>{
+        navigate('/Admin/stats')
+    }
 
     const gotoView=()=>{
         navigate('/Admin/view')

@@ -5,6 +5,7 @@ import Issue from '../pages/user/Issue/Issue';
 import View from '../pages/user/View/View';
 import Detail from '../pages/user/Detail/Detail';
 import Layout from '../components/Layout/Layout';
+import Stats from '../pages/user/Stats/Stats';
 
 function UserRouter() {
   return (
@@ -14,7 +15,7 @@ function UserRouter() {
             <Route path='/view' element={<View />}/>
             <Route path='/detail/:id' element={<Detail/>}/>
             <Route path='/issue' element={<Issue/>}/>
-            <Route path='/stats' element={<Userhome />}/>
+            <Route path='/stats/*' element={<Stats />}/>
         </Routes>
     </Layout>
   );

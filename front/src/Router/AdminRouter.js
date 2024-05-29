@@ -6,6 +6,7 @@ import View from '../pages/user/View/View';
 import Detail from '../pages/user/Detail/Detail';
 import AdminLayout from '../components/Layout/AdminLayout';
 import Admin from '../pages/admin/Admin';
+import Stats from '../pages/user/Stats/Stats';
 
 function AdminRouter() {
   return (
@@ -15,7 +16,7 @@ function AdminRouter() {
         <Route path='/view' element={<View />}/>
         <Route path='/detail' element={<Detail/>}/>
         <Route path='/issue' element={<Issue/>}/>
-        <Route path='/stats' element={<Userhome />}/>
+        <Route path='/stats/*' element={<Stats />}/>
         <Route path='/admin/*' element={<Admin/>}/>
       </Routes>
     </AdminLayout>
