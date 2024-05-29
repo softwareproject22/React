@@ -1,35 +1,57 @@
 import { useState } from "react";
 import './Issue.css'
+import { createIssue } from "../../../apis/issue";
 
 function Issue(){
     const [title, setTitle]=useState('');
     const [description, setDescription]=useState('');
+    const [tag, setTag]=useState('opt1');
+    const [priority, setPriority]=useState('opt1');
 
+    const tagSelectChange=(event)=>{
+        setTag(event.target.value)
+    }
+
+    const prioritySelectChange=(event)=>{
+        setPriority(event.target.value)
+    }
+
+    const postIssue=async(event)=>{
+        let data={
+            title : title,
+            description : description,
+            tag : tag,
+            priority : priority
+        }
+
+        await createIssue(data)
+        alert("이슈가 등록되었습니다")
+    }
 
     return(
-        <div>
+        <div className="flexbox">
             <div className="title">Issue 등록하기</div>
-            <form className="register">
+            <form className="register" onSubmit={postIssue}>
                 <div>
                     <span>
-                        <label for="title">Title :</label>
+                        <label htmlFor="title">Title :</label>
                         <input type="text" id="title" value={title} required onChange={event => setTitle(event.currentTarget.value)}></input>
                     </span>
 
                     <span>
-                        <label for="description">Description :</label><br/><br/>
+                        <label htmlFor="description">Description :</label><br/><br/>
                         <input className="body" type="text" id="description" value={description} required onChange={event => setDescription(event.currentTarget.value)}></input>
                     </span>
 
                     <span>
-                        <label for="tag">Tag :</label>
-                        <select id="tag">
+                        <label htmlFor="tag">Tag :</label>
+                        <select id="tag" value={tag} onChange={tagSelectChange}>
                             <option value="opt1">Option 1</option>
                             <option value="opt2">Option 2</option>
                         </select>
                     
-                        <label for="priority">Priority :</label>
-                        <select id="priority">
+                        <label htmlFor="priority">Priority :</label>
+                        <select id="priority" value={priority} onChange={prioritySelectChange}>
                             <option value="opt1">Option 1</option>
                             <option value="opt2">Option 2</option>
                         </select>
