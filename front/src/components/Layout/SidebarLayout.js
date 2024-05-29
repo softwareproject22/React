@@ -3,7 +3,7 @@ import Sidebar from '../Sidebar/Sidebar';
 
 const SidebarLayout=(props)=>{
     return(
-        <div className='flexbox'>
+        <div className='box'>
             <Sidebar/>
             <main className='sidebar'>
                 {props.children}
