@@ -12,7 +12,7 @@ function UserRouter() {
         <Routes>
             <Route path='/' element={<Userhome />}/>
             <Route path='/view' element={<View />}/>
-            <Route path='/detail' element={<Detail/>}/>
+            <Route path='/detail/:id' element={<Detail/>}/>
             <Route path='/issue' element={<Issue/>}/>
             <Route path='/stats' element={<Userhome />}/>
         </Routes>
