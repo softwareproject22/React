@@ -2,11 +2,14 @@ import { useParams } from 'react-router-dom';
 import './Detail.css'
 import { useState } from 'react';
 import { getIssue } from '../../../apis/issue';
+import Issue from '../Issue/Issue';
+import { SearchComment, addComment } from '../../../apis/comment';
 
 //history 눌렀을때 모달로 comment history 불러오도록
 function Detail(){
     const params=useParams();
     const [detail, setDetail]=useState([])
+    const [comment, setComment]=useState("");
 
     useState(()=>{
         const fetchData = async () => {
@@ -26,12 +29,51 @@ function Detail(){
         fetchData();
     },[])
 
-    const handleComment=()=>{
+    const handleComment=(event)=>{
+        event.preventDefault();
+        let props={
+            content: comment,
+            issueId: params.id,
+            nickname: "sam"
+        }
 
+        const fetchData = async () => {
+            try{
+                const res=addComment(props);
+                
+                res.then(promiseresult => {
+                    const data = promiseresult.data;
+                    alert(data);
+                });
+            }
+            catch(err){
+              console.log(err)
+            }
+        }
+        fetchData();
+        setComment("")        
     }
 
     const handleFix=()=>{
 
+    }
+
+    const loadHistory=()=>{
+        const fetchData = async () => {
+            try{
+                const res=SearchComment(params.id);
+                
+                res.then(promiseresult => {
+                    const data = promiseresult.data;
+                    console.log(data);
+                });
+            }
+            catch(err){
+              console.log(err)
+            }
+        }
+        
+        fetchData();
     }
 
     return(
@@ -76,9 +118,9 @@ function Detail(){
                     <div id='description'>{detail.description}</div>
                 </footer>
             </span>
-            <button className='history'>...</button>
+            <button className='history' onClick={loadHistory}>...</button>
             <form onSubmit={handleComment}>
-                <input type='text' placeholder='Comment'></input>
+                <input type='text' value={comment} placeholder='Comment' required onChange={(event)=>setComment(event.currentTarget.value)}></input>
                 <input type='submit' value="추가"></input>
             </form>
         </div>

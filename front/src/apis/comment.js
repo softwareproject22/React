@@ -10,7 +10,7 @@ export const addComment=async(props)=>{
     
     try{
         const res=api.post('/comment/add', data);
-        console.log(res)
+        //console.log(res)
         return res;
     }
     catch(err){
@@ -19,11 +19,11 @@ export const addComment=async(props)=>{
 }
 
 //이슈 Id로 코멘트 리스트 탐색
-export const SearchComment=async(props)=>{
+export const SearchComment=async(issueId)=>{
     
     try{
-        const res=api.get('/comment/'+props.issueId, data);
-        console.log(res)
+        const res=api.get('/comment/'+issueId);
+        //console.log(res)
         return res;
     }
     catch(err){
