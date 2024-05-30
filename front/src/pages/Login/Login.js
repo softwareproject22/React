@@ -2,19 +2,39 @@ import { useState } from 'react';
 import '../../App.css'
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
+import { userLogin } from '../../apis/user';
 
 function Login(){
     const navigate=useNavigate();
     const [id, setId]=useState('');
     const [pwd, setPwd]=useState('');
 
-    const handleSubmit=()=>{
-        if(id==='admin'){
-            navigate('/Admin');
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
+        let data={
+            id : id,
+            pwd : pwd
         }
-        else{
-            navigate(`/User`);
-        }
+        
+        const res=userLogin(data)
+        res.then(promiseresult => {
+            const data = promiseresult.data;
+            console.log(data.message);
+            if(data.message==='Login successful'){
+                alert("로그인 성공하였습니다.")
+                if(id==='admin'){
+                    navigate('/Admin');
+                }
+                else{
+                    navigate('/User')
+                }
+            }
+            else{
+                alert("아이디 혹은 비밀번호가 옳지 않습니다.")
+                setId("")
+                setPwd("")
+            }
+        });
     }
 
     return(

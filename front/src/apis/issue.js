@@ -103,7 +103,7 @@ export const getIssue=async(issueId)=>{
 //상태로 이슈 검색
 export const SearchIssuebyStatus=async(props)=>{
     try{
-        const res= await api.get("/issue/searchByState/1/"+props.state);
+        const res= await api.get("/issue/searchByState/1/"+props);
         console.log(res)
         return res;
     }
