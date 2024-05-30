@@ -1,0 +1,57 @@
+.obj{
+    list-style-type: none;
+    border-bottom: 1px solid #e9e9e9;
+    margin-inline: 10px;
+}
+  
+.Header{
+    display: flex;
+    text-align: left;
+}
+  
+.User{
+    font-weight: bold;
+}
+  
+.Box{
+    display: inline-block;
+    margin: 10px 5px;
+}
+
+.allcomment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.commentheader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90vw;
+    margin-right: 2vh;
+    margin-bottom: 3vh;
+
+    button{
+        width: 50px;
+        border: 1px solid #827f7f;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    button:hover{
+        background-color: #827f7f;
+    }
+}
+
+.commentholder{
+    width: 90vw;
+    height: 70vh;
+    border-radius: 10px;
+    border: 1px solid #827f7f;
+    overflow-y: auto;
+}
+
+.commentholder::-webkit-scrollbar{
+    display: none;
+}

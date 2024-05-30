@@ -92,7 +92,7 @@ export const changeFixer=async(props)=>{
 export const getIssue=async(issueId)=>{
     try{
         const res= await api.get("/issue/"+issueId);
-        console.log(res)
+        //console.log(res)
         return res;
     }
     catch(err){

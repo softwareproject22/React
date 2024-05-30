@@ -1,13 +1,15 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import './Detail.css'
 import { useState } from 'react';
 import { getIssue } from '../../../apis/issue';
-import Issue from '../Issue/Issue';
-import { SearchComment, addComment } from '../../../apis/comment';
+import { addComment } from '../../../apis/comment';
 
 //history 눌렀을때 모달로 comment history 불러오도록
 function Detail(){
     const params=useParams();
+    const navigate=useNavigate();
+    const location=useLocation();
+    const path=location.pathname;
     const [detail, setDetail]=useState([])
     const [comment, setComment]=useState("");
 
@@ -17,7 +19,7 @@ function Detail(){
                 const res=getIssue(params.id)
                 res.then(promiseresult => {
                     const data = promiseresult.data;
-                    console.log(data);
+                    //console.log(data);
                     setDetail(data)
                 });
             }
@@ -59,21 +61,12 @@ function Detail(){
     }
 
     const loadHistory=()=>{
-        const fetchData = async () => {
-            try{
-                const res=SearchComment(params.id);
-                
-                res.then(promiseresult => {
-                    const data = promiseresult.data;
-                    console.log(data);
-                });
-            }
-            catch(err){
-              console.log(err)
-            }
+        if(path.includes("User")){
+            navigate('/User/comment/'+params.id)
         }
-        
-        fetchData();
+        else{
+            navigate('/Admin/comment/'+params.id)
+        }
     }
 
     return(

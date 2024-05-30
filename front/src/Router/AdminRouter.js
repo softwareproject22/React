@@ -7,6 +7,7 @@ import Detail from '../pages/user/Detail/Detail';
 import AdminLayout from '../components/Layout/AdminLayout';
 import Admin from '../pages/admin/Admin';
 import Stats from '../pages/user/Stats/Stats';
+import Comment from '../pages/user/Detail/Comment/Comment';
 
 function AdminRouter() {
   return (
@@ -15,6 +16,7 @@ function AdminRouter() {
         <Route path='/' element={<Userhome />}/>
         <Route path='/view' element={<View />}/>
         <Route path='/detail/:id' element={<Detail/>}/>
+        <Route path='/comment/:id' element={<Comment/>}/>
         <Route path='/issue' element={<Issue/>}/>
         <Route path='/stats/*' element={<Stats />}/>
         <Route path='/admin/*' element={<Admin/>}/>
