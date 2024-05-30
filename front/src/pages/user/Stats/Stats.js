@@ -10,7 +10,7 @@ function Stats() {
         <Routes>
             <Route path='/' element={<NumofIssue/>}/>
             <Route path='/status' element={<CountStatus/>}/>
-            <Route path='/tag' element={<CountTags/>}/>
+            <Route path='/tags' element={<CountTags/>}/>
         </Routes>
     </StatsbarLayout>
   );

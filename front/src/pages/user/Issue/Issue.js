@@ -17,6 +17,7 @@ function Issue(){
     }
 
     const postIssue=async(event)=>{
+        event.preventDefault();
         let data={
             title : title,
             description : description,
@@ -24,8 +25,21 @@ function Issue(){
             priority : priority
         }
 
-        await createIssue(data)
-        alert("이슈가 등록되었습니다")
+        const res=createIssue(data)
+        res.then(promiseresult => {
+            const data = promiseresult.data;
+            console.log(data);
+            if(data==="이슈가 생성되었습니다."){  
+                alert("이슈가 등록되었습니다")
+                setTitle("")
+                setDescription("");
+                setTag('opt1')
+                setPriority('opt1')
+            }
+            else{
+                alert(data)
+            }
+        });
     }
 
     return(

@@ -65,7 +65,7 @@ export const SearchUserById=(userId)=>{
 //모든 유저정보
 export const getUserlist=()=>{
     try{
-        const res=api.get('/home/userlist')
+        const res=api.get('/home/login/userlist')
         //console.log(res)
         return res;
     }
