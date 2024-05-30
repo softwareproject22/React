@@ -13,23 +13,28 @@
     }
 }
 
-.styled-table {
-    border-collapse: collapse;
-    width: 100%;
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-}
+.issuetable{
+    overflow-y: auto;
+    height: 60vh;
 
-.styled-table th, .styled-table td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
-}
-
-.styled-table th {
-    font-weight: bold;
-}
-
-.id{
-    color: #f5b38e;
+    .styled-table {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        font-size: 20px;
+    }
+    
+    .styled-table th, .styled-table td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    .styled-table th {
+        font-weight: bold;
+    }
+    
+    .id{
+        color: #f5b38e;
+    }
 }

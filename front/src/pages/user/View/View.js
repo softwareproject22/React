@@ -111,6 +111,7 @@ function View(){
     return(
         <div className='view'>
             <div><input type="search" value={search} placeholder="🔍 키워드로 검색하기" onKeyDown={searchIssue} onChange={event => setSearch(event.currentTarget.value)}></input></div>
+            <div className='issuetable'>
             <table className='styled-table'>
                 <thead>
                     <tr>
@@ -136,6 +137,7 @@ function View(){
 
                 </tbody>
             </table>
+            </div>
         </div>
     );
 }

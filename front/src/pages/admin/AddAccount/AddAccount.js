@@ -3,34 +3,32 @@ import './AddAccount.css'
 import { addAccount, getUserlist } from '../../../apis/user';
 
 function AddAccount(){
+    const [data, setData]=useState([]);
     const [nickname, setNickname]=useState("");
     const [userId, setUserId]=useState("");
     const [pwd, setPwd]=useState("");
     const [cpwd, setCpwd]=useState("");
     const [role, setRole]=useState("");
 
-    useState(()=>{
-        const fetchData = async () => {
-            try{
-                const res=getUserlist()
-                res.then(promiseresult => {
-                    const data = promiseresult.data;
-                    console.log(data);
-                });
-            }
-            catch(err){
-              console.log(err)
-            }
+    const fetchData = async () => {
+        try{
+            const res=getUserlist()
+            res.then(promiseresult => {
+                const data = promiseresult.data;
+                console.log(data);
+                setData(data)
+            });
         }
+        catch(err){
+          console.log(err)
+        }
+    }
 
+    useState(()=>{
         fetchData();
     },[])
 
-    const data=[
-        {id: 1, account:"Admin",userId:"Chungang",role:"Admin",lastlogin:"2024-05-29"}
-    ];
-
-    const handleSubmit=(event)=>{
+    const handleSubmit=async(event)=>{
         event.preventDefault();
         let data={
             id : userId,
@@ -40,8 +38,24 @@ function AddAccount(){
             role : role
         }
 
-        addAccount(data);
-        alert("계정이 추가되었습니다.")
+        const res=addAccount(data);
+        res.then(promiseresult => {
+            const data = promiseresult;
+            //console.log(data)
+            if(data.status===201){
+                alert("계정이 추가되었습니다.")
+                setNickname("")
+                setUserId("")
+                setCpwd("")
+                setPwd("")
+                setRole("")
+            }
+            else{
+                alert(data.data)
+            }
+
+        });
+        fetchData();
     }
 
     return(
@@ -73,6 +87,7 @@ function AddAccount(){
                 </span>
                 <input type='submit' value="등록"></input>
             </form>
+            <div className='usertable'>
             <table className='styled-table'>
                 <thead>
                     <tr>
@@ -85,17 +100,18 @@ function AddAccount(){
                 </thead>
                 <tbody>
                     {data.map((item) => (
-                    <tr key={item.id}>
+                    <tr key={item.loginId}>
                         <td><input type='checkbox'/></td>
-                        <td className='id'>{item.account}</td>
-                        <td>{item.userId}</td>
+                        <td className='id'>Account</td>
+                        <td>{item.loginId}</td>
                         <td>{item.role}</td>
-                        <td>{item.lastlogin}</td>
+                        <td>2024-05-30</td>
                     </tr>
                 ))}
 
                 </tbody>
             </table>
+            </div>
         </div>
     );
 }
