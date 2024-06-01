@@ -155,3 +155,15 @@ export const SearchReportedIssue=async()=>{
         console.log(err)
     }
 }
+
+//담당자 추천
+export const recommend=async(issueId)=>{
+    try{
+        const res= await api.get("/recommend/assigneesForIssue/"+issueId);
+        console.log(res)
+        return res;
+    }
+    catch(err){
+        console.log(err)
+    }
+}

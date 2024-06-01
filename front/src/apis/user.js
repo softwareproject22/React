@@ -13,7 +13,7 @@ export const addAccount=async(props)=>{
 
     try{
         const res=api.post('/home/join', data)
-        console.log(res)
+        //console.log(res)
         return res;
     }
     catch(err){
@@ -30,6 +30,7 @@ export const userLogin=async(props)=>{
 
     try{
         const res=api.post('/home/login', data)
+        console.log(res)
         return res;
     }
     catch(err){
@@ -53,7 +54,7 @@ export const Logout=()=>{
 //userId를 통해 유저정보 탐색
 export const SearchUserById=(userId)=>{
     try{
-        const res=api.get('/home/info/'+userId)
+        const res=api.get('/home/login/info?loginId='+userId)
         console.log(res)
         return res;
     }

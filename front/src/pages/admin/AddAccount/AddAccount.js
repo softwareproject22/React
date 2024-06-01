@@ -51,7 +51,7 @@ function AddAccount(){
                 setRole("")
             }
             else{
-                alert(data.data)
+                alert(data.data.message)
             }
 
         });
@@ -100,9 +100,9 @@ function AddAccount(){
                 </thead>
                 <tbody>
                     {data.map((item) => (
-                    <tr key={item.loginId}>
+                    <tr key={item.nickname}>
                         <td><input type='checkbox'/></td>
-                        <td className='id'>Account</td>
+                        <td className='id'>{item.nickname}</td>
                         <td>{item.loginId}</td>
                         <td>{item.role}</td>
                         <td>2024-05-30</td>

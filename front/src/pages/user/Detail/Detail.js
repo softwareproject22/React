@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import './Detail.css'
 import { useState } from 'react';
-import { getIssue } from '../../../apis/issue';
+import { getIssue, recommend } from '../../../apis/issue';
 import { addComment } from '../../../apis/comment';
 
 //history 눌렀을때 모달로 comment history 불러오도록
@@ -30,6 +30,9 @@ function Detail(){
                     })
                     setTag(tag)
                 });
+
+                const re=recommend(params.id);
+                console.log(re)
             }
             catch(err){
               console.log(err)

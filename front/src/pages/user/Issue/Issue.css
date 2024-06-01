@@ -89,6 +89,7 @@
         }
 
         li{
+            font-size: 12px;
             display: flex;
             justify-content: space-between;
             border-radius: 5px;
@@ -101,7 +102,7 @@
             .remove_btn{
                 margin-right: 5px;
                 color: #827f7f;
-                font-size: 12px;
+                font-size: 10px;
             }
             
         }
