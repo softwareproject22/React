@@ -5,12 +5,12 @@ import DailyIssuesChart from "../Charts/DailyIssuesChart";
 import { analyzeDaily, analyzeMonthly } from "../../../../apis/analyze";
 
 function NumofIssue(){
-    const dailyData=analyzeDaily()
-    console.log(dailyData)
+    //const dailyData=analyzeDaily()
+    //console.log(dailyData)
 
     
-    const monthlyData=analyzeMonthly()
-    console.log(monthlyData)
+    //const monthlyData=analyzeMonthly()
+    //console.log(monthlyData)
     const [month, setMonth]=useState(true);
 
     const Monthchart=()=>{

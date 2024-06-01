@@ -37,4 +37,12 @@
     .id{
         color: #f5b38e;
     }
+
+    .click{
+        cursor: pointer;
+    }
+
+    .click:hover{
+        text-decoration: underline;
+    }
 }

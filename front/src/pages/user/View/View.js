@@ -117,7 +117,7 @@ function View(){
                     <tr>
                         <th>Issue</th>
                         <th>Title</th>
-                        <th>Tag</th>
+                        <th>Reporter</th>
                         <th>State</th>
                         <th>Priority</th>
                         <th>Created</th>
@@ -127,8 +127,8 @@ function View(){
                     {data.map((item) => (
                     <tr key={item.id}>
                         <td className='id'>#{item.id}</td>
-                        <td onClick={()=>getDetail(item.id)}>{item.title}</td>
-                        <td>{item.tag}</td>
+                        <td className="click" onClick={()=>getDetail(item.id)}>{item.title}</td>
+                        <td>{item.reporter}</td>
                         <td>{item.status}</td>
                         <td>{item.priority}</td>
                         <td>{item.reportedTime}</td>

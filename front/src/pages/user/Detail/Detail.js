@@ -11,6 +11,7 @@ function Detail(){
     const location=useLocation();
     const path=location.pathname;
     const [detail, setDetail]=useState([])
+    const [tag, setTag]=useState("")
     const [comment, setComment]=useState("");
 
     useState(()=>{
@@ -21,6 +22,13 @@ function Detail(){
                     const data = promiseresult.data;
                     //console.log(data);
                     setDetail(data)
+
+                    let tag=""
+                    data.tags.map((item)=>{
+                        tag=tag+item.category
+                        tag=tag+" "
+                    })
+                    setTag(tag)
                 });
             }
             catch(err){
@@ -95,7 +103,7 @@ function Detail(){
                         <div id='priority'>{detail.priority}</div>
 
                         <label htmlFor='tag'>Tag :</label>
-                        <div id='tag'>tag</div>
+                        <div id='tag'>{tag}</div>
                     </div>
                     <div className='horizon'>
                         <label htmlFor='fixer'>Fixer :</label>
