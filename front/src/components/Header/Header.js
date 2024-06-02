@@ -2,10 +2,13 @@ import './Header.css'
 import '../../App.css'
 import { useNavigate } from 'react-router-dom';
 import { Logout } from '../../apis/user';
+import { useEffect, useState } from 'react';
 //import { useCookieContext } from '../../cookies';
 
 const Header=(props)=>{
     const navigate=useNavigate();
+    const nickname=window.sessionStorage.getItem('nickname')
+    const role=window.sessionStorage.getItem('role')
     //const {removeUserCookie}=useCookieContext();
 
     const handleLogout=()=>{
@@ -51,7 +54,7 @@ const Header=(props)=>{
                 </div>
                 <nav className='menu'>
                     <ul>
-                        user로 로그인
+                        {nickname?nickname:"User"}로 로그인
                         <span>|</span>
                         <li onClick={handleLogout}>
                             Logout
@@ -62,9 +65,13 @@ const Header=(props)=>{
                         <li onClick={gotoView}>
                             View
                         </li>
-                        <li onClick={gotoIssue}>
+                        {   role==="TESTER"
+                            ?
+                            <li onClick={gotoIssue}>
                             Issue
-                        </li>
+                            </li>
+                            :null
+                        }
                         <li onClick={gotoStats}>
                             Stats
                         </li>

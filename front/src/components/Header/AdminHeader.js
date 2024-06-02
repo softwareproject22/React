@@ -27,16 +27,8 @@ const AdminHeader=()=>{
         navigate('/Admin/')
     }
 
-    const gotoIssue=()=>{
-        navigate('/Admin/issue')
-    }
-
     const gotoStats=()=>{
         navigate('/Admin/stats')
-    }
-
-    const gotoView=()=>{
-        navigate('/Admin/view')
     }
 
     const gotoAdmin=()=>{
@@ -58,12 +50,6 @@ const AdminHeader=()=>{
                         </li>
                         <li onClick={gotoHome}>
                             Home
-                        </li>
-                        <li onClick={gotoView}>
-                            View
-                        </li>
-                        <li onClick={gotoIssue}>
-                            Issue
                         </li>
                         <li onClick={gotoStats}>
                             Stats

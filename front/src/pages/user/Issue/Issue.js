@@ -19,6 +19,7 @@ function Issue(){
     //const { getUserCookie }=useCookieContext();
     //const userInfo=getUserCookie();
     //const {loginId}=userInfo;
+    const role=window.sessionStorage.getItem('role')
     const nickname=window.sessionStorage.getItem('nickname');
     const [title, setTitle]=useState('');
     const [description, setDescription]=useState('');
@@ -62,7 +63,6 @@ function Issue(){
         setPriority(event.target.value)
     }
 
-    //tester만 보낼 수 있게 할 것인가?
     const postIssue=async(event)=>{
         event.preventDefault();
         if(tag.length===0){
@@ -79,6 +79,13 @@ function Issue(){
         }
         console.log(data);
 
+        if(role!=="TESTER"){
+            alert("TESTER만 이슈를 등록할 수 있습니다.")
+            setTitle("")
+            setDescription("");
+            setTag([])
+            setPriority('opt1')
+        }else{
         const res=createIssue(data)
         res.then(promiseresult => {
             const data = promiseresult.data;
@@ -93,7 +100,7 @@ function Issue(){
             else{
                 alert(data)
             }
-        });
+        });}
         }
     }
 

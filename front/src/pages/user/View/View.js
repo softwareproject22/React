@@ -10,7 +10,6 @@ function View(){
     const [data, setData]=useState([]);
     const [search, setSearch]=useState("");
     const navigate=useNavigate();
-    //const userRole="PL";
     const location=useLocation();
     const path=location.pathname;
     
@@ -61,8 +60,7 @@ function View(){
         }
 
         if(role==="DEV"){
-            console.log(nickname)
-            DevData({nickname});
+            DevData(nickname);
         }
         else if(role==="TESTER"){
             TesterData(nickname);
@@ -99,7 +97,7 @@ function View(){
     }
 
     useEffect(()=>{
-        console.log(nickname,role)
+        //console.log(nickname,role)
         loadIssue();
     },[])
 

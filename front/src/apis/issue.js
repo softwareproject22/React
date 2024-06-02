@@ -115,7 +115,6 @@ export const SearchIssuebyStatus=async(props)=>{
 
 //브라우즈(PL view)
 export const browseIssue=async()=>{
-    
     try{
         const res= await api.get("/issue/browse/"+1);
         var data=await res.data;
@@ -128,9 +127,9 @@ export const browseIssue=async()=>{
 
 //배정된 이슈 검색(Dev view)
 export const SearchAssignedIssue=async(props)=>{
-    console.log(props)
+    const nickname=window.sessionStorage.getItem('nickname');
     try{
-        const res= await api.get("/issue/searchByAssignee/1/"+props);
+        const res= await api.get("/issue/searchByAssignee/1/"+nickname);
         console.log(res)
         return res;
     }
@@ -141,9 +140,9 @@ export const SearchAssignedIssue=async(props)=>{
 
 //등록한 이슈 검색(tester view)
 export const SearchReportedIssue=async(reporter)=>{
-    
+    const nickname=window.sessionStorage.getItem('nickname');
     try{
-        const res= await api.get("/issue/searchByReporter/1/"+reporter);
+        const res= await api.get("/issue/searchByReporter/1/"+nickname);
         console.log(res)
         return res;
     }

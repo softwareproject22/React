@@ -14,10 +14,6 @@ function AdminRouter() {
     <AdminLayout>
       <Routes>
         <Route path='/' element={<Userhome />}/>
-        <Route path='/view' element={<View />}/>
-        <Route path='/detail/:id' element={<Detail/>}/>
-        <Route path='/comment/:id' element={<Comment/>}/>
-        <Route path='/issue' element={<Issue/>}/>
         <Route path='/stats/*' element={<Stats />}/>
         <Route path='/admin/*' element={<Admin/>}/>
       </Routes>

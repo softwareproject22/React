@@ -41,7 +41,7 @@ function AddAccount(){
         const res=addAccount(data);
         res.then(promiseresult => {
             const data = promiseresult;
-            //console.log(data)
+            console.log(data)
             if(data.status===201){
                 alert("계정이 추가되었습니다.")
                 setNickname("")
