@@ -57,7 +57,7 @@ function List(props){
     return(
       props.list.map((res)=>{
         return(
-          <ul className='obj'>
+          <ul className='obj' key={res.commentId}>
             <li key={res.commentId}>
               <span className='Header'>
                 <div className='User'>{res.sender}</div>

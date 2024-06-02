@@ -77,30 +77,32 @@ function Issue(){
             priority : priority,
             tags : tag
         }
-        console.log(data);
+        //console.log(data);
 
         if(role!=="TESTER"){
-            alert("TESTER만 이슈를 등록할 수 있습니다.")
+            alert("이슈 등록 권한이 없습니다.")
             setTitle("")
             setDescription("");
             setTag([])
             setPriority('opt1')
-        }else{
-        const res=createIssue(data)
-        res.then(promiseresult => {
-            const data = promiseresult.data;
-            console.log(data.data);
-            if(data==="이슈가 생성되었습니다."){  
-                alert("이슈가 등록되었습니다")
-                setTitle("")
-                setDescription("");
-                setTag([])
-                setPriority('opt1')
-            }
-            else{
-                alert(data)
-            }
-        });}
+        }
+        else{
+            const res=createIssue(data)
+            res.then(promiseresult => {
+                const data = promiseresult.data;
+                //console.log(data.data);
+                if(data==="이슈가 생성되었습니다."){  
+                    alert("이슈가 등록되었습니다")
+                    setTitle("")
+                    setDescription("");
+                    setTag([])
+                    setPriority('opt1')
+                }
+                else{
+                    alert(data)
+                }
+            });
+        }
         }
     }
 

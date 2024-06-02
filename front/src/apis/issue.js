@@ -26,13 +26,14 @@ export const createIssue=async(props)=>{
 //put
 //status 변경
 export const changeState=async(props)=>{
+    const nickname=window.sessionStorage.getItem('nickname')
     let data={
-        nickname:"",
-        status:""
+        nickname:nickname,
+        status:props.status
     }
 
     try{
-        const res= await api.put("/issue/changeStatus"+props.issueId, data);
+        const res= await api.put("/issue/changeStatus/"+props.issueId, data);
         console.log(res)
         return res;
     }
@@ -43,13 +44,14 @@ export const changeState=async(props)=>{
 
 //담당자 배정
 export const Assign=async(props)=>{
+    const nickname=window.sessionStorage.getItem('nickname')
     let data={
-        nickname:"",
-        assignedUserId:""
+        nickname:props.dev,
+        pl: nickname
     }
 
     try{
-        const res= await api.put("/issue/changeAssignee"+props.issueId, data);
+        const res= await api.put("/issue/changeAssignee/"+props.issueId, data);
         console.log(res)
         return res;
     }
@@ -59,9 +61,9 @@ export const Assign=async(props)=>{
 }
 
 //assigned로 상태 변경
-export const changeAssigned=async(props)=>{
+export const changeAssigned=async(issueId)=>{
     try{
-        const res= await api.put("/issue/changeAssigned"+props.issueId);
+        const res= await api.put("/issue/changeAssigned/"+issueId);
         console.log(res)
         return res;
     }
@@ -78,7 +80,7 @@ export const fixCode=async()=>{
 //fixer 변경
 export const changeFixer=async(props)=>{
     try{
-        const res= await api.put("/issue/changeFixer"+props.issueId);
+        const res= await api.put("/issue/changeFixer/"+props);
         console.log(res)
         return res;
     }

@@ -1,11 +1,12 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import './Detail.css'
 import { useState } from 'react';
-import { getIssue, recommend } from '../../../apis/issue';
+import { Assign, changeAssigned, changeFixer, changeState, getIssue, recommend } from '../../../apis/issue';
 import { addComment } from '../../../apis/comment';
 
-//history 눌렀을때 모달로 comment history 불러오도록
 function Detail(){
+    const role=window.sessionStorage.getItem('role')
+    const nickname=window.sessionStorage.getItem('nickname')
     const params=useParams();
     const navigate=useNavigate();
     const location=useLocation();
@@ -13,41 +14,114 @@ function Detail(){
     const [detail, setDetail]=useState([])
     const [tag, setTag]=useState("")
     const [comment, setComment]=useState("");
+    const [btnName, setBtnName]=useState(null)
+    //담당자 배정
+    const [assign, setAssign]=useState(false)
+    const [devList, setList]=useState([])
+    const [choice, setChoice]=useState("blank")
+
+    const fetchData = async () => {
+        try{
+            const res=getIssue(params.id)
+            res.then(promiseresult => {
+                const data = promiseresult.data;
+                //console.log(data);
+                setDetail(data)
+                switch(data.status){
+                    case "new" :
+                        if(role==="PL" && btnName!=="담당자 배정"){
+                            setBtnName("담당자 배정")
+                            const re=recommend(params.id);
+                            re.then(promiseresult=>{
+                                const data=promiseresult.data;
+                                setList(data)
+                                console.log(data)
+                            })
+                            //console.log(re)
+                        }
+                        break;
+                    case "assigned" :
+                        if(role==="DEV"){
+                            setBtnName("fix error")
+                        }
+                        break;
+                    case "fixed":
+                        if(role==="TESTER"){
+                            setBtnName("수정 확인")
+                        }
+                        break;
+                    case "resolved":
+                        if(role==="PL"){
+                            setBtnName("이슈 closed")
+                        }
+                        break;
+                    default:
+                        console.log(data.status)
+                }
+                let tag=""
+                data.tags.map((item)=>{
+                    tag=tag+item.category
+                    tag=tag+" "
+                })
+                setTag(tag)
+            });
+        }
+        catch(err){
+          console.log(err)
+        }
+    }
 
     useState(()=>{
-        const fetchData = async () => {
-            try{
-                const res=getIssue(params.id)
-                res.then(promiseresult => {
-                    const data = promiseresult.data;
-                    //console.log(data);
-                    setDetail(data)
-
-                    let tag=""
-                    data.tags.map((item)=>{
-                        tag=tag+item.category
-                        tag=tag+" "
-                    })
-                    setTag(tag)
-                });
-
-                const re=recommend(params.id);
-                console.log(re)
-            }
-            catch(err){
-              console.log(err)
-            }
-        }
-
         fetchData();
     },[])
+
+    const putAssignee=async()=>{
+        let data={
+            dev : choice,
+            issueId : params.id
+        }
+        try{
+            const res=await Assign(data)
+            console.log(res)
+
+            const response=await changeAssigned(params.id);
+            console.log(response)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    const StatusChange=async(status)=>{
+        let data={
+            issueId: params.id,
+            status: status
+        }
+        try{
+            const res=await changeState(data)
+            console.log(res)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    const FixerChange=async()=>{
+        try{
+            const res=await changeFixer(params.id)
+            console.log(res)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 
     const handleComment=(event)=>{
         event.preventDefault();
         let props={
             content: comment,
             issueId: params.id,
-            nickname: "sam"
+            nickname: nickname
         }
 
         const fetchData = async () => {
@@ -67,8 +141,40 @@ function Detail(){
         setComment("")        
     }
 
-    const handleFix=()=>{
-
+    const handleFix=async()=>{
+        switch(btnName){
+            case "담당자 배정" :
+                setBtnName("확인")
+                setAssign(true)
+                break;
+            case "fix error" :
+                await FixerChange();
+                await StatusChange("fixed")
+                fetchData();
+                setBtnName(null)
+                break;
+            case "수정 확인":
+                await StatusChange("resolved")
+                fetchData();
+                setBtnName(null)
+                break;
+            case "이슈 closed":
+                await StatusChange("closed")
+                fetchData();
+                setBtnName(null)
+                break;
+            case "확인":
+                if(choice==="blank"){
+                    alert("담당자를 선택하세요")
+                }
+                else{
+                    await putAssignee();
+                    setAssign(false)
+                    fetchData();
+                    setBtnName(null)
+                }
+                break;
+        }
     }
 
     const loadHistory=()=>{
@@ -89,7 +195,7 @@ function Detail(){
                             <div id='num'>#{detail.id}</div>
                             <div id='status'>{detail.status}</div>
                         </div>
-                        <button>수정</button>
+                        <button onClick={handleFix}>{btnName}</button>
                     </div>
                     <div id='title'>{detail.title}</div>
                 </header>
@@ -99,7 +205,15 @@ function Detail(){
                         <div id='reporter'>{detail.reporter}</div>
 
                         <label htmlFor='assignee'>Assignee :</label>
-                        <div id='assignee'>{detail.assignee===null?"-":detail.assignee}</div>
+                        {assign?
+                        <div id='assignee'>
+                            <select id='devlist' value={choice} onChange={(event)=>{setChoice(event.target.value)}}>
+                                <option value={"blank"}>담당자 설정</option>
+                                <Recommend list={devList}/>
+                            </select>
+                        </div>
+                        :<div id='assignee'>{(detail.assignee===null)?"-":detail.assignee}</div>
+                        }
                     </div>
                     <div className='horizon'>
                         <label htmlFor='priority'>Priority :</label>
@@ -128,6 +242,17 @@ function Detail(){
                 <input type='submit' value="추가"></input>
             </form>
         </div>
+    );
+}
+
+function Recommend(props){
+    return(
+        props.list.map((item=>{
+        //console.log(item)
+            return(
+                <option key={item} value={item}>{item}</option>
+            );
+        }))
     );
 }
 

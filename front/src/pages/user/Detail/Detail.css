@@ -30,8 +30,8 @@
             }
 
             button{
-                width: 5vw;
                 height: 3vh;
+                width: 100px;
                 background-color: #f5f5f5;
                 color: #827f7f;
                 border: none;

@@ -65,13 +65,9 @@ const Header=(props)=>{
                         <li onClick={gotoView}>
                             View
                         </li>
-                        {   role==="TESTER"
-                            ?
-                            <li onClick={gotoIssue}>
+                        <li onClick={gotoIssue}>
                             Issue
-                            </li>
-                            :null
-                        }
+                        </li>
                         <li onClick={gotoStats}>
                             Stats
                         </li>
