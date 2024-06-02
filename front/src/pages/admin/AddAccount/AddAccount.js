@@ -3,6 +3,7 @@ import './AddAccount.css'
 import { addAccount, getUserlist } from '../../../apis/user';
 
 function AddAccount(){
+    const [submit, setSubmit]=useState(false);
     const [data, setData]=useState([]);
     const [nickname, setNickname]=useState("");
     const [userId, setUserId]=useState("");
@@ -26,7 +27,7 @@ function AddAccount(){
 
     useState(()=>{
         fetchData();
-    },[])
+    },[nickname])
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
@@ -39,6 +40,7 @@ function AddAccount(){
         }
 
         const res=addAccount(data);
+        //fetchData();
         res.then(promiseresult => {
             const data = promiseresult;
             console.log(data)
@@ -55,7 +57,6 @@ function AddAccount(){
             }
 
         });
-        fetchData();
     }
 
     return(
@@ -95,7 +96,6 @@ function AddAccount(){
                         <th>Account</th>
                         <th>User Id</th>
                         <th>Role</th>
-                        <th>Last Login</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,7 +105,6 @@ function AddAccount(){
                         <td className='id'>{item.nickname}</td>
                         <td>{item.loginId}</td>
                         <td>{item.role}</td>
-                        <td>2024-05-30</td>
                     </tr>
                 ))}
 

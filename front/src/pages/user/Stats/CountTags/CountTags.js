@@ -3,33 +3,32 @@ import { analyzeTags } from "../../../../apis/analyze";
 import StatusChart from "../Charts/StatusChart";
 
 function CountTags(){
+    const TagList=[
+        {key: 1, value: "로그인"},
+        {key: 2, value: "회원가입"},
+        {key: 3, value: "이슈생성"},
+        {key: 4, value: "코멘트"},
+        {key: 5, value: "기능요청"},
+        {key: 6, value: "개선점"},
+        {key: 7, value: "보안"},
+        {key: 8, value: "태그"}
+    ]
     const [data,setData]=useState([])
     
     const getData=async()=>{
         const res=analyzeTags();
+        //console.log(res)
         res.then(promiseresult => {
             const data = promiseresult.data;
             //console.log(data);
 
             let newlist=[]
-            if(data.로그인!==undefined){
-                let datakey={status:"로그인", issues : data.로그인}
-                newlist.push(datakey)
-            }
-            else{
-                let datakey={status:"로그인", issues : 0}
-                newlist.push(datakey)
-            }
-
-            if(data.회원가입!==undefined){
-                let datakey={status:"회원가입", issues : data.회원가입}
-                newlist.push(datakey)
-            }
-            else{
-                let datakey={status:"회원가입", issues : 0}
-                newlist.push(datakey)
-            }
-            //console.log(newlist)
+            TagList.forEach(tag=>{
+                const value=data[tag.value];
+                let datakey={status:tag.value, issues : value !== undefined ? value : 0};
+                newlist.push(datakey);
+            })
+            console.log(newlist)
             setData(newlist)
         });
     }
