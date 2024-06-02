@@ -12,6 +12,9 @@ const AdminHeader=()=>{
             console.log(data.message);
             if(data.message==='Logout successful'){
                 alert("로그아웃합니다.")
+                window.sessionStorage.removeItem('id')
+                window.sessionStorage.removeItem('role')
+                window.sessionStorage.removeItem('nickname')
                 navigate('/')
             }
             else{

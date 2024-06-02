@@ -8,9 +8,9 @@ export const createIssue=async(props)=>{
         title: props.title,
         description: props.description,
         code: "코드",
-        reporter:"sam",
+        reporter:props.nickname,
         priority: props.priority,
-        tags: [1,2]
+        tags: props.tags
     };
 
     try{
@@ -127,12 +127,10 @@ export const browseIssue=async()=>{
 }
 
 //배정된 이슈 검색(Dev view)
-export const SearchAssignedIssue=async()=>{
-    
+export const SearchAssignedIssue=async(props)=>{
+    console.log(props)
     try{
-        //reporter=props.userId로 탐색
-        const assignee=null;
-        const res= await api.get("/issue/searchByAssignee/1/"+assignee);
+        const res= await api.get("/issue/searchByAssignee/1/"+props);
         console.log(res)
         return res;
     }
@@ -142,11 +140,9 @@ export const SearchAssignedIssue=async()=>{
 }
 
 //등록한 이슈 검색(tester view)
-export const SearchReportedIssue=async()=>{
+export const SearchReportedIssue=async(reporter)=>{
     
     try{
-        //reporter=props.userId로 탐색
-        const reporter=null;
         const res= await api.get("/issue/searchByReporter/1/"+reporter);
         console.log(res)
         return res;

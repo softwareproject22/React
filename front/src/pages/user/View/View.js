@@ -5,10 +5,12 @@ import { SearchAssignedIssue, SearchIssuebyStatus, SearchReportedIssue, browseIs
 
 //테이블 스크롤 추가
 function View(){
+    const role= window.sessionStorage.getItem('role');
+    const nickname=window.sessionStorage.getItem('nickname')
     const [data, setData]=useState([]);
     const [search, setSearch]=useState("");
     const navigate=useNavigate();
-    const userRole="PL";
+    //const userRole="PL";
     const location=useLocation();
     const path=location.pathname;
     
@@ -34,8 +36,8 @@ function View(){
                 
                 res.then(promiseresult => {
                     const data = promiseresult;
-                    //console.log(data);
-                    setData(data)
+                    //console.log(data.data);
+                    setData(data.data)
                 });
             }
             catch(err){
@@ -50,7 +52,7 @@ function View(){
                 res.then(promiseresult => {
                     const data = promiseresult;
                     //console.log(data);
-                    setData(data)
+                    setData(data.data)
                 });
             }
             catch(err){
@@ -58,11 +60,12 @@ function View(){
             }
         }
 
-        if(userRole==="Dev"){
-            DevData();
+        if(role==="DEV"){
+            console.log(nickname)
+            DevData({nickname});
         }
-        else if(userRole==="Tester"){
-            TesterData();
+        else if(role==="TESTER"){
+            TesterData(nickname);
         }
         else{
             PLData();    
@@ -96,6 +99,7 @@ function View(){
     }
 
     useEffect(()=>{
+        console.log(nickname,role)
         loadIssue();
     },[])
 

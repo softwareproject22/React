@@ -2,11 +2,11 @@ import './Header.css'
 import '../../App.css'
 import { useNavigate } from 'react-router-dom';
 import { Logout } from '../../apis/user';
-import { useCookieContext } from '../../cookies';
+//import { useCookieContext } from '../../cookies';
 
 const Header=(props)=>{
     const navigate=useNavigate();
-    const {removeUserCookie}=useCookieContext();
+    //const {removeUserCookie}=useCookieContext();
 
     const handleLogout=()=>{
         const res=Logout();
@@ -15,7 +15,10 @@ const Header=(props)=>{
             console.log(data.message);
             if(data.message==='Logout successful'){
                 alert("로그아웃합니다.")
-                removeUserCookie();
+                window.sessionStorage.removeItem('id')
+                window.sessionStorage.removeItem('role')
+                window.sessionStorage.removeItem('nickname')
+                //removeUserCookie();
                 navigate('/')
             }
             else{

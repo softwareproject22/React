@@ -1,19 +1,36 @@
 import { useEffect, useState } from "react";
 import './Issue.css'
 import { createIssue } from "../../../apis/issue";
+import { useCookieContext } from "../../../cookies";
+
+const TagList=[
+    {key: 0, value: "태그를 선택하세요"},
+    {key: 1, value: "로그인"},
+    {key: 2, value: "회원가입"},
+    {key: 3, value: "이슈생성"},
+    {key: 4, value: "코멘트"},
+    {key: 5, value: "기능요청"},
+    {key: 6, value: "개선점"},
+    {key: 7, value: "보안"},
+    {key: 8, value: "태그"}
+]
 
 function Issue(){
+    //const { getUserCookie }=useCookieContext();
+    //const userInfo=getUserCookie();
+    //const {loginId}=userInfo;
+    const nickname=window.sessionStorage.getItem('nickname');
     const [title, setTitle]=useState('');
     const [description, setDescription]=useState('');
     const [tag, setTag]=useState([]);
-    const [opt, setOpt]=useState("");
+    const [opt, setOpt]=useState(TagList[0].value);
     const [priority, setPriority]=useState('opt1');
 
     useEffect(()=>{
         if(tag.length===0){
-            setOpt("blank")
+            setOpt(TagList[0].value)
         }
-        console.log(tag)
+        //console.log(tag)
     },[tag])
 
 
@@ -32,12 +49,12 @@ function Issue(){
             alert("태그 선택은 두 개까지만 가능합니다")
         }
         else{
-            if(!tag.includes(event.target.value)&&event.target.value!=='blank'){
+            if(!tag.includes(event.target.value)&&event.target.value!==0){
                 var list=[...tag]
                 list.push(event.target.value)
                 setTag(list)
             }
-            setOpt(event.target.value)
+            setOpt(event.target.child)
         }
     }
 
@@ -45,6 +62,7 @@ function Issue(){
         setPriority(event.target.value)
     }
 
+    //tester만 보낼 수 있게 할 것인가?
     const postIssue=async(event)=>{
         event.preventDefault();
         if(tag.length===0){
@@ -55,13 +73,16 @@ function Issue(){
             title : title,
             description : description,
             tag : tag,
-            priority : priority
+            nickname : nickname,
+            priority : priority,
+            tags : tag
         }
+        console.log(data);
 
         const res=createIssue(data)
         res.then(promiseresult => {
             const data = promiseresult.data;
-            console.log(data);
+            console.log(data.data);
             if(data==="이슈가 생성되었습니다."){  
                 alert("이슈가 등록되었습니다")
                 setTitle("")
@@ -100,16 +121,15 @@ function Issue(){
                     <span>
                         <label htmlFor="tag">Tag :</label>
                         <select id="tag" value={opt} onChange={tagSelectChange}>
-                            <option value='blank'>태그를 선택하세요</option>
-                            <option value="로그인">로그인</option>
-                            <option value="회원가입">회원가입</option>
-                            <option value="이슈생성">이슈생성</option>
-                            <option value="코멘트">코멘트</option>
-                            <option value="기능요청">기능요청</option>
-                            <option value="개선점">개선점</option>
-                            <option value="보안">보안</option>
-                            <option value="태그">태그</option>
-                        
+                            <option value={TagList[0].key}>{TagList[0].value}</option>
+                            <option value={TagList[1].key}>{TagList[1].value}</option>
+                            <option value={TagList[2].key}>{TagList[2].value}</option>
+                            <option value={TagList[3].key}>{TagList[3].value}</option>
+                            <option value={TagList[4].key}>{TagList[4].value}</option>
+                            <option value={TagList[5].key}>{TagList[5].value}</option>
+                            <option value={TagList[6].key}>{TagList[6].value}</option>
+                            <option value={TagList[7].key}>{TagList[7].value}</option>
+                            <option value={TagList[8].key}>{TagList[8].value}</option>
                         </select>
                     
                         <label htmlFor="priority">Priority :</label>
@@ -134,7 +154,7 @@ function List(props){
     return(
       props.list.map((res)=>{
         return(
-            <li key={res} onClick={()=>removeTag(res)}><span></span>{res}<span className="remove_btn">x</span></li>
+            <li key={res} onClick={()=>removeTag(res)}><span></span>{TagList[res].value}<span className="remove_btn">x</span></li>
         )
       })
     );

@@ -3,13 +3,13 @@ import '../../App.css'
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import { SearchUserById, userLogin } from '../../apis/user';
-import { useCookieContext } from '../../cookies';
+//import { useCookieContext } from '../../cookies';
 
 function Login(){
     const navigate=useNavigate();
     const [id, setId]=useState('');
     const [pwd, setPwd]=useState('');
-    const {setUserCookie} = useCookieContext();
+    //const {setUserCookie} = useCookieContext();
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
@@ -29,7 +29,10 @@ function Login(){
                 //console.log(res)
                 res.then(promiseresult=>{
                     const data=promiseresult.data
-                    setUserCookie(data)
+                    //세션 스토리지에 데이터 저장
+                    window.sessionStorage.setItem('id', data.loginId);
+                    window.sessionStorage.setItem('role', data.role);
+                    window.sessionStorage.setItem('nickname', data.nickname);
                 })
                 if(id==='admin'){
                     navigate('/Admin');

@@ -14,7 +14,7 @@ export const CookieProvider = ({ children }) => {
   };
 
   const getUserCookie = () => {
-    console.log(cookies.user)
+    //console.log(cookies.user)
     return cookies.user ? cookies.user : null;
   };
 
