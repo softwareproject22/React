@@ -29,6 +29,10 @@ function CountTags(){
                 newlist.push(datakey);
             })
             console.log(newlist)
+            
+            if(newlist.length===0){
+                alert("이슈가 존재하지 않습니다")
+            }
             setData(newlist)
         });
     }

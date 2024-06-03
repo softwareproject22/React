@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import './Issue.css'
 import { createIssue } from "../../../apis/issue";
-import { useCookieContext } from "../../../cookies";
 
 const TagList=[
     {key: 0, value: "태그를 선택하세요"},
@@ -25,7 +24,7 @@ function Issue(){
     const [description, setDescription]=useState('');
     const [tag, setTag]=useState([]);
     const [opt, setOpt]=useState(TagList[0].value);
-    const [priority, setPriority]=useState('opt1');
+    const [priority, setPriority]=useState('major');
 
     useEffect(()=>{
         if(tag.length===0){
@@ -84,7 +83,7 @@ function Issue(){
             setTitle("")
             setDescription("");
             setTag([])
-            setPriority('opt1')
+            setPriority('major')
         }
         else{
             const res=createIssue(data)
@@ -96,7 +95,7 @@ function Issue(){
                     setTitle("")
                     setDescription("");
                     setTag([])
-                    setPriority('opt1')
+                    setPriority('major')
                 }
                 else{
                     alert(data)
@@ -143,8 +142,11 @@ function Issue(){
                     
                         <label htmlFor="priority">Priority :</label>
                         <select id="priority" value={priority} onChange={prioritySelectChange}>
-                            <option value="opt1">Option 1</option>
-                            <option value="opt2">Option 2</option>
+                            <option value="blocker">blocker</option>
+                            <option value="critical">critical</option>
+                            <option value="major">major</option>
+                            <option value="minor">minor</option>
+                            <option value="trivial">trivial</option>
                         </select>
                     </span>
                 </div>

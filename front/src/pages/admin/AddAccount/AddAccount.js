@@ -3,7 +3,7 @@ import './AddAccount.css'
 import { addAccount, getUserlist } from '../../../apis/user';
 
 function AddAccount(){
-    const [submit, setSubmit]=useState(false);
+    //const [submit, setSubmit]=useState(false);
     const [data, setData]=useState([]);
     const [nickname, setNickname]=useState("");
     const [userId, setUserId]=useState("");
@@ -30,7 +30,7 @@ function AddAccount(){
     },[nickname])
 
     const handleSubmit=async(event)=>{
-        event.preventDefault();
+        //event.preventDefault();
         let data={
             id : userId,
             pwd : pwd,

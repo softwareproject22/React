@@ -2,7 +2,6 @@ import './Header.css'
 import '../../App.css'
 import { useNavigate } from 'react-router-dom';
 import { Logout } from '../../apis/user';
-import { useEffect, useState } from 'react';
 //import { useCookieContext } from '../../cookies';
 
 const Header=(props)=>{
